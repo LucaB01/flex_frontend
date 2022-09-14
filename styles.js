@@ -2,7 +2,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from './colors';
 
-const styles = StyleSheet.create({
+const gStyles = StyleSheet.create({
   fullWidth: {
     width: '100%',
   },
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export default gStyles;

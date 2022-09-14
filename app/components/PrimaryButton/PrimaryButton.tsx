@@ -1,4 +1,6 @@
-import React from 'react';
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import React from "react";
 import {
   Text,
   StyleSheet,
@@ -6,11 +8,14 @@ import {
   ViewStyle,
   TextStyle,
   Pressable,
-} from 'react-native';
-import {Fold} from 'react-native-animated-spinkit';
-import {colors} from '../../../colors';
+  View,
+} from "react-native";
+import { Fold } from "react-native-animated-spinkit";
+import { colors } from "../../../colors";
+import { ButtonPresetNames, buttonPresets } from "./PrimaryButton.presets";
 
 interface PrimaryButtonProps {
+  preset?: ButtonPresetNames;
   title: string;
   onPress: () => void;
   loading?: boolean;
@@ -19,10 +24,18 @@ interface PrimaryButtonProps {
   textStyle?: StyleProp<TextStyle>;
   textStyleDisabled?: StyleProp<TextStyle>;
   disabled?: boolean;
+  leftIcon?: IconProp;
+  leftIconColor?: string;
+  leftIconSize?: number;
+  rightIcon?: IconProp;
+  rightIconColor?: string;
+  rightIconSize?: number;
+  notch?: boolean;
 }
 
 export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   onPress,
+  preset,
   title,
   loading,
   style,
@@ -30,9 +43,23 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   textStyleDisabled = styles.buttonText,
   textStyle = styles.buttonText,
   disabled,
+  leftIcon,
+  leftIconColor,
+  leftIconSize,
+  rightIcon,
+  rightIconColor,
+  rightIconSize,
+  notch,
 }: PrimaryButtonProps) => {
+  const buttonStyle = [
+    preset ? buttonPresets[preset] : buttonPresets.primary,
+    style,
+  ];
+  const buttonTextStyle = [styles.buttonText, textStyle];
 
-  const buttonStyle = [styles.primaryButton, style];
+  if (preset === "secondary") {
+    buttonTextStyle.push({ color: colors.white });
+  }
 
   if (disabled) {
     buttonStyle.push(disabledStyle);
@@ -42,44 +69,57 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     return (
       <Pressable
         style={[disabledStyle ? disabledStyle : {}, style]}
-        disabled={true}>
+        disabled={true}
+      >
         <Fold size={25} color={colors.white} />
       </Pressable>
     );
   }
 
   return (
-    <Pressable
-      onPress={onPress}
-      style={buttonStyle}
-      disabled={disabled}>
-      <Text style={textStyle}>{title}</Text>
+    <Pressable onPress={onPress} style={buttonStyle} disabled={disabled}>
+      {notch && <View style={styles.triangle} />}
+      {leftIcon && !loading && (
+        <FontAwesomeIcon
+          icon={leftIcon}
+          color={leftIconColor || "white"}
+          size={leftIconSize || 20}
+        />
+      )}
+      <Text style={buttonTextStyle}>{title}</Text>
+      {rightIcon && !loading && (
+        <FontAwesomeIcon
+          icon={rightIcon}
+          color={rightIconColor || "white"}
+          size={rightIconSize || 20}
+        />
+      )}
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  primaryButton: {
-    borderRadius: 8,
-    width: '100%',
-    height: 45,
-    backgroundColor: colors.primaryColor,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: 'rgba(136, 154, 175, 0.15)',
-    shadowOffset: {width: 0, height: 2},
-    shadowRadius: 10,
-    elevation: 2,
-  },
-
   disabledPrimaryButton: {
     opacity: 0.5,
   },
 
   buttonText: {
-    alignSelf: 'center',
-    fontWeight: 'bold',
+    alignSelf: "center",
+    fontWeight: "bold",
     fontSize: 17,
     color: colors.black,
+  },
+
+  triangle: {
+    width: 0,
+    height: 0,
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderLeftWidth: 50,
+    borderRightWidth: 50,
+    borderBottomWidth: 100,
+    borderLeftColor: "transparent",
+    borderRightColor: "transparent",
+    borderBottomColor: "red",
   },
 });

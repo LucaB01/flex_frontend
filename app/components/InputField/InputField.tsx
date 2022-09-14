@@ -1,9 +1,18 @@
-import React from 'react';
-import {KeyboardTypeOptions, StyleProp, StyleSheet, TextInput, TextStyle, ViewStyle} from 'react-native';
+import React from "react";
+import {
+  KeyboardTypeOptions,
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TextStyle,
+  View,
+  ViewStyle,
+} from "react-native";
+import { Text } from "..";
 
 interface InputFieldProps {
   placeholder?: string;
-  onChange?: (event) => void;
+  onChange?: (event: any) => void;
   secureTextEntry?: boolean;
   keyboardType?: KeyboardTypeOptions;
   value?: string;
@@ -14,9 +23,12 @@ interface InputFieldProps {
   editable?: boolean;
   onFocus?: () => void;
   onBlur?: () => void;
-  autoCapitalize?: 'none' | 'words';
+  autoCapitalize?: "none" | "words";
   onSubmitEditing?: () => void;
   autoFocus?: boolean;
+  label?: string;
+  labelStyle?: TextStyle;
+  containerStyle?: ViewStyle;
 }
 
 export const InputField: React.FC<InputFieldProps> = ({
@@ -30,11 +42,20 @@ export const InputField: React.FC<InputFieldProps> = ({
   textStyle,
   onTouch,
   editable = true,
-  autoCapitalize = 'words',
+  autoCapitalize = "words",
   onSubmitEditing,
   autoFocus,
+  label,
+  labelStyle,
+  containerStyle,
 }: InputFieldProps) => {
   return (
+    <View style={containerStyle}>
+      {label && (
+        <Text style={[{ marginBottom: 10, paddingLeft: 2 }, labelStyle]}>
+          {label}
+        </Text>
+      )}
       <TextInput
         autoFocus={autoFocus}
         onTouchStart={onTouch}
@@ -45,24 +66,26 @@ export const InputField: React.FC<InputFieldProps> = ({
         autoCapitalize={autoCapitalize}
         maxLength={maxLength}
         onSubmitEditing={onSubmitEditing}
-        onChangeText={event => {
+        onChangeText={(event) => {
           if (onChange) {
             onChange(event);
           }
         }}
         value={value}
         editable={editable}
-        secureTextEntry={secureTextEntry} />
+        secureTextEntry={secureTextEntry}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
+    height: 50,
     padding: 10,
-    width: '100%',
+    width: "100%",
     borderRadius: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    color: '#FFFFFF',
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    color: "#FFFFFF",
   },
 });

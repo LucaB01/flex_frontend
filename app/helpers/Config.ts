@@ -1,7 +1,7 @@
 import { version } from '../../package.json';
 
 const devConfig = {
-  API_URL: 'http://192.168.0.213:1337',
+  API_URL: 'http://192.168.228.44:1337',
   APP_VERSION: version as string,
 };
 

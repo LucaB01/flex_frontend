@@ -2,9 +2,9 @@ import React, {ReactChild, ReactChildren} from 'react';
 import {StyleProp, StyleSheet, TextStyle} from 'react-native';
 import {Text as Txt} from 'react-native';
 import {colors} from '../../../colors';
-import {presets} from './TextPresets';
+import {presets, TextPresets} from './TextPresets';
 
-interface DefaultTextProps {
+interface TextProps {
   children?:
     | ReactChild
     | ReactChildren
@@ -12,16 +12,16 @@ interface DefaultTextProps {
     | (string | number | undefined)[];
   style?: StyleProp<TextStyle>;
   numberOfLines?: number;
-  preset?: string;
+  preset?: TextPresets;
 }
 
-export const Text: React.FC<DefaultTextProps> = ({
+export const Text: React.FC<TextProps> = ({
   children,
   style,
   numberOfLines,
   preset = 'default',
-}: DefaultTextProps) => {
-  const presetStyle = presets[preset];
+}: TextProps) => {
+  const presetStyle = presets[preset] as any;
 
   if (numberOfLines) {
     return (

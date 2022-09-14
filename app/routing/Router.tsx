@@ -1,19 +1,20 @@
-import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {TabBar} from '../components/index';
-import NewPasswordScreen from '../screens/AuthScreens/ForgotPasswordFlow/NewPasswordScreen';
-import SignUpScreen from '../screens/AuthScreens/SignUpScreen/SignUpScreen';
-import SignInScreen from '../screens/AuthScreens/SignInScreen/SignInScreen';
-import ForgotPasswordScreen from '../screens/AuthScreens/ForgotPasswordFlow/ForgotPasswordScreen';
-import ConfirmEmailScreen from '../screens/AuthScreens/ConfirmEmailScreen/ConfirmEmailScreen';
-import WorkoutQuestionsScreen from '../screens/AuthScreens/WorkoutQuestionsScreen/WorkoutQuestionsScreen';
-import HomeScreen from '../screens/MainScreens/HomeScreen/HomeScreen';
-import WorkoutScreen from '../screens/MainScreens/WorkoutScreen/WorkoutScreen';
-import ProfileScreen from '../screens/MainScreens/ProfileScreen/ProfileScreen';
-import StartScreen from '../screens/StartScreen/StartScreen';
-import GenerateWorkoutLoadingScreen from '../screens/AuthScreens/GenerateWorkoutLoadingScreen/GenerateWorkoutLoadingScreen';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { TabBar } from "../components/index";
+import NewPasswordScreen from "../screens/AuthScreens/ForgotPasswordFlow/NewPasswordScreen";
+import SignUpScreen from "../screens/AuthScreens/SignUpScreen/SignUpScreen";
+import SignInScreen from "../screens/AuthScreens/SignInScreen/SignInScreen";
+import ForgotPasswordScreen from "../screens/AuthScreens/ForgotPasswordFlow/ForgotPasswordScreen";
+import ConfirmEmailScreen from "../screens/AuthScreens/ConfirmEmailScreen/ConfirmEmailScreen";
+import WorkoutQuestionsScreen from "../screens/AuthScreens/WorkoutQuestionsScreen/WorkoutQuestionsScreen";
+import HomeScreen from "../screens/MainScreens/HomeScreen/HomeScreen";
+import WorkoutScreen from "../screens/MainScreens/WorkoutScreen/WorkoutScreen";
+import ProfileScreen from "../screens/MainScreens/ProfileScreen/ProfileScreen";
+import StartScreen from "../screens/StartScreen/StartScreen";
+import GenerateWorkoutLoadingScreen from "../screens/AuthScreens/GenerateWorkoutLoadingScreen/GenerateWorkoutLoadingScreen";
+import UserSettingScreen from "../screens/MainScreens/ProfileScreen/UserSettingScreen/UserSettingScreen";
 
 const Router: React.FC = () => {
   const Tab = createBottomTabNavigator();
@@ -24,8 +25,9 @@ const Router: React.FC = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={'Home'}
-        tabBar={props => <TabBar {...props} />}>
+        initialRouteName={"Home"}
+        tabBar={(props) => <TabBar {...props} />}
+      >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Workout" component={WorkoutScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -39,7 +41,8 @@ const Router: React.FC = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-      }}>
+      }}
+    >
       <Stack.Group>
         <Stack.Screen name="Start" component={StartScreen} />
         <Stack.Screen name="SignInScreen" component={SignInScreen} />
@@ -61,6 +64,7 @@ const Router: React.FC = () => {
           name="GenerateWorkoutLoadingScreen"
           component={GenerateWorkoutLoadingScreen}
         />
+        <Stack.Screen name="UserSettingScreen" component={UserSettingScreen} />
         <Stack.Screen name="HomeScreen" component={HomeTabs} />
       </Stack.Group>
     </Stack.Navigator>

@@ -23,7 +23,7 @@ const WorkoutSlider: React.FC<WorkoutSliderProps> = ({
   const navigation = useNavigation();
   const workoutPlan = workoutStore?.workoutPlan;
 
-  const renderCard = ({item}) => {
+  const renderCard = ({item}: any) => {
     return item.image ? (
       <ImageBackground
         style={styles.imageContainer}

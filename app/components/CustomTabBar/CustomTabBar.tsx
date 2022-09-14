@@ -65,7 +65,7 @@ export const TabBar = ({state, descriptors, navigation}: any) => {
                 <FontAwesomeIcon
                   icon={iconName}
                   color={colors.primaryColor}
-                  size={30}
+                  size={iconName === "user" ? 26 : 30}
                 />
               </View>
             </Pressable>

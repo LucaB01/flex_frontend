@@ -5,4 +5,5 @@ export interface User {
   password?: string;
   confirmed: boolean;
   setupCompleted: boolean;
+  avatar?: string;
 }
